@@ -1,14 +1,21 @@
-## Setup
+## Setup and Prerequisites
 
-* Python and pip need to be installed. Both were done within Windows with the Python .exe installer downloaded from their site.
+* Python and pip need to be installed. For testing and development, both were done within Windows with the Python .exe installer downloaded from their site.
 
 ```
 python -V
 pip -V
- 
-python -m pip install Flask
+```
 
+Once `python` and `pip` are confirmed to be installed and working, we will need to install the `python Flask` module.
+
+```
+python -m pip install Flask
+```
+
+```
 $env:FLASK_APP = "hello.py"
+export FLASK_APP=hello.py
 
 python -m flask run
 python -m flask run --port 9080
