@@ -20,3 +20,10 @@ export FLASK_APP=hello.py
 python -m flask run
 python -m flask run --port 9080
 ```
+
+## The Docker part
+
+```
+docker build -t python/flask .
+docker run -it --rm --name python_flask python/flask
+```
