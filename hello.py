@@ -1,5 +1,6 @@
 import json
 import time
+import copy
 import psutil
 from flask import Flask
 
@@ -11,8 +12,7 @@ _VER = '1.0.0'
 json_out =  {
                 "status"  : 'OK', 
                 "version" : _VER, 
-                "uptime"  : 'up since ' + START_TIME, 
-                "memory"  : dict(psutil.virtual_memory()._asdict())
+                "uptime"  : 'up since ' + START_TIME 
             }
 
 @app.route('/')
@@ -22,6 +22,14 @@ def return_index():
 @app.route('/healthz')
 def return_healthz():
     return json.dumps(json_out, indent=4)
+
+@app.route('/healthz-full')
+def return_healthz_full():
+    json_out_full = copy.deepcopy(json_out)
+    json_out_full.update( {'memory' : dict(psutil.virtual_memory()._asdict())} )
+    json_out_full.update( {'disk'   : dict(psutil.disk_usage('/')._asdict())} )
+    
+    return json.dumps(json_out_full, indent=4)
 
 @app.route('/version')
 def return_version():
