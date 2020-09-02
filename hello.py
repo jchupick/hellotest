@@ -45,7 +45,15 @@ def return_disk():
 
 @app.route('/help')
 def return_help():
-    return 'Help here...'
+    return """Available endpoints:
+           
+           /
+           /healthz
+           /healthz-full
+           /version
+           /disk
+           /mem
+           /help"""
 
 # Invokation from Docker image starts from here
 if __name__ == "__main__": 
