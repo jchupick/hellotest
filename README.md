@@ -43,10 +43,10 @@ docker run -it --rm -p 8080:8080 --name python_flask python/flask
 ## Test the Application
 
 ### Valid endopints
-http://localhost:8080/
-http://localhost:8080/healthz
-http://localhost:8080/healthz-full
-http://localhost:8080/version
-http://localhost:8080/mem
-http://localhost:8080/disk
-http://localhost:8080/help
+- http://localhost:8080/
+- http://localhost:8080/healthz
+- http://localhost:8080/healthz-full
+- http://localhost:8080/version
+- http://localhost:8080/mem
+- http://localhost:8080/disk
+- http://localhost:8080/help
