@@ -1,18 +1,20 @@
 import json
-import time
+import datetime
 import copy
 import psutil
+
 from flask import Flask
 
 app = Flask(__name__)
 
-START_TIME = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())
+START_TIME     = datetime.datetime.now()
+START_TIME_STR = START_TIME.strftime('%Y-%m-%d %H:%M:%S')
 _VER = '1.0.0'
 
 json_out =  {
-                "status"  : 'OK', 
-                "version" : _VER, 
-                "uptime"  : 'up since ' + START_TIME 
+                "status"    : 'OK', 
+                "version"   : _VER, 
+                "starttime" : 'up since ' + START_TIME_STR 
             }
 
 print('__name__ is ', __name__)
@@ -27,7 +29,11 @@ def return_healthz():
 
 @app.route('/healthz-full')
 def return_healthz_full():
+    now    = datetime.datetime.now()
+    uptime = now - START_TIME
+
     json_out_full = copy.deepcopy(json_out)
+    json_out_full.update( {'uptime' : str(uptime.total_seconds()) + ' seconds' } )
     json_out_full.update( {'memory' : dict(psutil.virtual_memory()._asdict())} )
     json_out_full.update( {'disk'   : dict(psutil.disk_usage('/')._asdict())} )
     
