@@ -35,10 +35,16 @@ def return_healthz_full():
     human_uptime = humanize.naturaldelta(uptime)
 
     json_out_full = copy.deepcopy(json_out)
-    #json_out_full.update( {'uptime' : str(uptime.total_seconds()) + ' seconds' } )
     json_out_full.update( {'uptime' : human_uptime } )
     json_out_full.update( {'memory' : dict(psutil.virtual_memory()._asdict())} )
-    json_out_full.update( {'disk'   : dict(psutil.disk_usage('/')._asdict())} )
+
+    disk_dict = psutil.disk_usage('/')._asdict()
+
+    disk_dict["total"] = humanize.naturalsize(disk_dict["total"], binary=True)
+    disk_dict["used"]  = humanize.naturalsize(disk_dict["used"],  binary=True)
+    disk_dict["free"]  = humanize.naturalsize(disk_dict["free"],  binary=True)
+
+    json_out_full.update( {'disk': dict(disk_dict)} )
     
     return json.dumps(json_out_full, indent=4)
 
