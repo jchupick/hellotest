@@ -2,6 +2,7 @@ import json
 import datetime
 import copy
 import psutil
+import humanize
 
 from flask import Flask
 
@@ -31,9 +32,11 @@ def return_healthz():
 def return_healthz_full():
     now    = datetime.datetime.now()
     uptime = now - START_TIME
+    human_uptime = humanize.naturaldelta(uptime)
 
     json_out_full = copy.deepcopy(json_out)
-    json_out_full.update( {'uptime' : str(uptime.total_seconds()) + ' seconds' } )
+    #json_out_full.update( {'uptime' : str(uptime.total_seconds()) + ' seconds' } )
+    json_out_full.update( {'uptime' : human_uptime } )
     json_out_full.update( {'memory' : dict(psutil.virtual_memory()._asdict())} )
     json_out_full.update( {'disk'   : dict(psutil.disk_usage('/')._asdict())} )
     
