@@ -15,6 +15,8 @@ json_out =  {
                 "uptime"  : 'up since ' + START_TIME 
             }
 
+print('__name__ is ', __name__)
+
 @app.route('/')
 def return_index():
     return 'Hello!'
@@ -32,6 +34,7 @@ def return_healthz_full():
     return json.dumps(json_out_full, indent=4)
 
 @app.route('/version')
+@app.route('/ver')
 def return_version():
     return 'Version is ' + _VER
 
@@ -57,4 +60,4 @@ def return_help():
 
 # Invokation from Docker image starts from here
 if __name__ == "__main__": 
-    app.run(host ='0.0.0.0', port = 8080, debug = True)
+    app.run(host ='0.0.0.0', port = 8080, debug = False)
