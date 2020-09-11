@@ -27,6 +27,7 @@ Once `python` and `pip` are confirmed to be installed and working, we will need 
 ```
 python -m pip install Flask
 python -m pip install psutil
+python -m pip install humanize
 ```
 
 #### Set the Flask application environment variable
