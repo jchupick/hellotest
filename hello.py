@@ -1,6 +1,9 @@
+# Standard Python
 import json
-import datetime
-import copy
+from datetime import datetime, timedelta
+from copy     import deepcopy
+
+# pip installs
 import psutil
 import humanize
 
@@ -8,7 +11,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
-START_TIME     = datetime.datetime.now()
+START_TIME     = datetime.now()
 START_TIME_STR = START_TIME.strftime('%Y-%m-%d %H:%M:%S')
 _VER = '1.0.0'
 
@@ -30,11 +33,11 @@ def return_healthz():
 
 @app.route('/healthz-full')
 def return_healthz_full():
-    now    = datetime.datetime.now()
+    now    = datetime.now()
     uptime = now - START_TIME
     human_uptime = humanize.naturaldelta(uptime)
 
-    json_out_full = copy.deepcopy(json_out)
+    json_out_full = deepcopy(json_out)
     json_out_full.update( {'uptime' : human_uptime } )
     json_out_full.update( {'memory' : dict(psutil.virtual_memory()._asdict())} )
 
