@@ -6,5 +6,5 @@ WORKDIR /usr/local/sbin
 ADD hello.py hello.py
 ENV FLASK_APP hello.py
 EXPOSE 5000
-ENTRYPOINT [ "flask", "run" ] 
+ENTRYPOINT [ "python", "-m", "flask", "run" ] 
 #CMD [ "--port", "5001" ]
