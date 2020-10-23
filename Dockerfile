@@ -5,6 +5,6 @@ RUN python -m pip install humanize
 WORKDIR /usr/local/sbin
 ADD hello.py hello.py
 ENV FLASK_APP hello.py
-# EXPOSE 8080
+EXPOSE 5000
 ENTRYPOINT [ "flask", "run" ] 
 #CMD [ "--port", "5001" ]
