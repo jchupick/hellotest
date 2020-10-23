@@ -7,4 +7,4 @@ ADD hello.py hello.py
 ENV FLASK_APP hello.py
 # EXPOSE 8080
 ENTRYPOINT [ "python", "hello.py" ] 
-CMD [ "--port", "5000" ]
+CMD [ "--port", "5001" ]
